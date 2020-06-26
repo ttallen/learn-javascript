@@ -6,70 +6,36 @@
     <title>Document</title>
 </head>
 <body>
+    <input type="text" id="input">
+    <button type="button" id="submit">新增資料</button>
+    <button class="btns"></button>
+    <ul id="list"></ul>
     <script>
-        var people = [
-            {
-                name: 'Allen',
-                like: '冰淇淋',
-                age: 25
-            },
-            {
-                name: 'Tom',
-                like: '巧克力',
-                age: 19
-            },
-            {
-                name: 'Sam',
-                like: '蛋糕',
-                age: 32
-            }
-        ];
-        
-        // var data = {};
-        // people.forEach(function(person, i){
-        //     console.log(person, i);
-        //     if(person.name === 'Allen') {
-        //         console.log(person);
-        //         data = person;
-        //     }
-        // });
-        // console.log('data', data);
+        var input = document.querySelector('#input');
+        var btnForSubmit = document.querySelector('#submit');
+        var list = document.querySelector('#list');
 
-        // 1.將 Allen 物件列出
+        btnForSubmit.addEventListener('click', updateData);
 
+        function updateData() {
+            var text = input.value;
+            var sourceData = list.innerHTML;
+            var string = sourceData + `<li> ${text} 
+                <button class="btns">刪除</button>
+            </li>`;
 
-        // var data = [];
-        // people.forEach(function(person, i){
-        //     if(person.age > 20) {
-        //         data.push(i);
-        //     }
-        // });
-        // console.log(data);
+            console.log(sourceData);
+            list.innerHTML = string;
 
-        // 2.新增一個陣列,將年齡大於 20 的抓出
+            var btns = document.querySelectorAll('.btns');
+            btns.forEach(function(btn) {
+                btn.addEventListener('click', removeData)
+            });
+        };
 
-
-        // let originString = '我叫' + people[0].name; //過去寫法
-        // let originUl = '<ul>\
-        //     <li>我叫 ' + people[0].name + '</li>\
-        //     <li>我叫 ' + people[1].name + '</li>\
-        //     <li>我叫 ' + people[2].name + '</li>\
-        // </ul>';
-        // console.log(originString);
-        // console.log(originUl);
-
-        // var string = `我叫 ${ people[0].name } `; //樣板字面值
-        // console.log(string);
-
-        var string = '';
-        people.forEach(function(person, i){
-            string += `<li>
-                我叫 ${ person.name }
-            </li>`
-        });
-        console.log(`<ul> ${string} </ul>`);
-
-        // 3.為所有的陣列中新增一個字串,內容為 "`${name} 愛吃 ${like}`"
+        function removeData(e) {
+            console.log(e.target.parentNode.remove());
+        }
     </script>
 </body>
 </html>
