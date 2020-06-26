@@ -24,10 +24,18 @@
                 age: 32
             }
         ];
-
+        
+        var data = {};
         people.forEach(function(person, i){
-            console.log(person, i);
-        })
+            // console.log(person, i);
+            if(person.name === 'Allen') {
+                console.log(person);
+                data = person;
+            }
+        });
+        console.log('data', data);
+
+        // 1.將 Allen 物件列出
     </script>
 </body>
 </html>
