@@ -25,17 +25,27 @@
             }
         ];
         
-        var data = {};
-        people.forEach(function(person, i){
-            // console.log(person, i);
-            if(person.name === 'Allen') {
-                console.log(person);
-                data = person;
-            }
-        });
-        console.log('data', data);
+        // var data = {};
+        // people.forEach(function(person, i){
+        //     console.log(person, i);
+        //     if(person.name === 'Allen') {
+        //         console.log(person);
+        //         data = person;
+        //     }
+        // });
+        // console.log('data', data);
 
         // 1.將 Allen 物件列出
+
+        var data = [];
+        people.forEach(function(person, i){
+            if(person.age > 20) {
+                data.push(i);
+            }
+        });
+        console.log(data);
+
+        // 2.新增一個陣列,將年齡大於 20 的抓出
     </script>
 </body>
 </html>
