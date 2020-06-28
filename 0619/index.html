@@ -17,25 +17,62 @@
 
         btnForSubmit.addEventListener('click', updateData);
 
+        var data = [
+            {
+                text: '這裡有一段話',
+            },
+            {
+                text: '這裡有一段話',
+            }
+        ];
+
         function updateData() {
-            var text = input.value;
-            var sourceData = list.innerHTML;
-            var string = sourceData + `<li> ${text} 
-                <button class="btns">刪除</button>
-            </li>`;
+            data.push({
+                text: input.value
+            });
+            render();
+        };
 
-            console.log(sourceData);
+        function removeData(e) {
+            // console.log(e.target.parentNode.remove());
+            data.splice(e.target.dataset.id, 1);
+            render();
+        }
+
+        function render() {
+            var string = '';
+            console.log(data);
+            data.forEach(function(item, i){
+                string += `<li> ${ item.text } 
+                <button class="btns" data-id="${ i }">移除</button>
+                </li>`
+            });
             list.innerHTML = string;
-
             var btns = document.querySelectorAll('.btns');
             btns.forEach(function(btn) {
                 btn.addEventListener('click', removeData)
             });
-        };
-
-        function removeData(e) {
-            console.log(e.target.parentNode.remove());
         }
+
+        // function updateData() {
+        //     var text = input.value;
+        //     var sourceData = list.innerHTML;
+        //     var string = sourceData + `<li> ${text} 
+        //         <button class="btns">刪除</button>
+        //     </li>`;
+
+        //     console.log(sourceData);
+        //     list.innerHTML = string;
+
+        //     var btns = document.querySelectorAll('.btns');
+        //     btns.forEach(function(btn) {
+        //         btn.addEventListener('click', removeData)
+        //     });
+        // };
+
+        // function removeData(e) {
+        //     console.log(e.target.parentNode.remove());
+        // }
     </script>
 </body>
 </html>
