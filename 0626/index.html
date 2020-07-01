@@ -9,6 +9,7 @@
     <script>
     // 物件下呼叫
     // 如果是傳統函式，只看呼叫前面那個物件(不看函式如何定義)
+    // 箭頭函式 -> 是看如何定義的，她沒有自己的 this
 
     // 1.
     // 物件下
@@ -80,22 +81,82 @@
     // obj.inner.fn1();
 
     // 6.
+    // var myName = '全域';
+    // function fn() {
+    //   console.log(this.myName);
+    // }
+    // var obj = {
+    //   myName: '小明',
+    //   inner: {
+    //     myName: '小明家',
+    //     fn1: function() {
+    //         setTimeout(function() { // callback -> simple call
+    //             console.log(this.myName);
+    //         });
+    //     }
+    //   }
+    // }
+    // obj.inner.fn1(); //全域
+
+    // 7.
+    // var myName = '全域';
+    // function fn() {
+    //   console.log(this.myName);
+    // }
+    // var obj = {
+    //   myName: '小明',
+    //   inner: {
+    //     myName: '小明家',
+    //     fn1: function() {
+    //         console.log(this.myName); //小明家
+    //         (() => {
+    //           console.log(this.myName);  //小明家
+    //         })();
+    //     }
+    //   }
+    // }
+    // obj.inner.fn1(); 
+    
+    // 8.
+    // var myName = '全域';
+    // function fn() {
+    //   console.log(this.myName);
+    // }
+    // var obj = {
+    //   myName: '小明',
+    //   inner: {
+    //     myName: '小明家',
+    //     fn1: function() {
+    //         console.log(this.myName); //小明家
+    //         var vm = this;  //物件下需要使用 this 時直接在最前面作定義
+    //         (function() {
+    //           console.log(vm.myName);  //小明家
+    //         })();
+    //         (() => {
+    //           console.log(vm.myName);  //小明家
+    //         })();
+    //     }
+    //   }
+    // }
+    // obj.inner.fn1(); 
+
+    // 9.
     var myName = '全域';
-    function fn() {
-      console.log(this.myName);
-    }
     var obj = {
       myName: '小明',
-      inner: {
-        myName: '小明家',
-        fn1: function() {
-            setTimeout(function() { // callback -> simple call
-                console.log(this.myName);
-            });
-        }
+      arr: [1, 2, 3, 4, 5],
+      fn1: function() {
+        var vm = this; // 物件下需要使用 this，直接在最前面做定義
+        this.arr.forEach(function(item) {
+          console.log(item);
+          console.log(this.myName); //全域
+          console.log(vm.myName);  //小明
+        });
+        // console.log(vm, this, vm === this);
+        // console.log(obj === this, obj === vm)
       }
     }
-    obj.inner.fn1();
+    obj.fn1();
 
     </script>
 </body>
